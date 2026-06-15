@@ -36,7 +36,7 @@ Aplicação usando React + TypeScript para buscar jogos, ver detalhes, avaliar, 
 
 >>> Deploy:
 
-- ...
+https://gameshelf-7bssg59qo-gagaaus-projects.vercel.app/
 
 >>>>> Autor:
 
