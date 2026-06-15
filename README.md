@@ -38,6 +38,10 @@ Aplicação usando React + TypeScript para buscar jogos, ver detalhes, avaliar, 
 
 https://gameshelf-7bssg59qo-gagaaus-projects.vercel.app/
 
+>>> Screenshot:
+
+![Tela do GameShelf](./screenshots/gameshelf.png)
+
 >>>>> Autor:
 
 Feito por Gabriel Henrique.
