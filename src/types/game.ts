@@ -44,6 +44,7 @@ export type LibraryItem = {
   gameId: number;
   status: GameStatus;
   personalRating: number;
+  game?: Game;
 };
 
 export type StoredLibrary = {

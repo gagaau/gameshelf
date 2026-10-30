@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+
+# Variaveis de ambiente
+.env
+.env.*
+!.env.example
