@@ -35,33 +35,71 @@ function getShortPlatforms(platforms: string[]) {
     return "Plataforma não informada";
   }
 
-  return platforms.slice(0, 3).join(", ");
+  const visiblePlatforms = platforms.slice(0, 2).join(" · ");
+  const remainingCount = platforms.length - 2;
+
+  if (remainingCount > 0) {
+    return `${visiblePlatforms} +${remainingCount}`;
+  }
+
+  return visiblePlatforms;
 }
 
 function GameCard({ game, libraryItem, onOpenGame }: GameCardProps) {
   const status = libraryItem ? libraryItem.status : "none";
 
+  const genres = game.genres.length > 0
+    ? game.genres.slice(0, 2).join(" · ")
+    : "Gênero não informado";
+
+  const ratingsText = game.ratingsCount === 1
+    ? "1 avaliação"
+    : `${game.ratingsCount.toLocaleString("pt-BR")} avaliações`;
+
   return (
     <article className="game-card">
-      <button className="game-card__cover-button" onClick={() => onOpenGame(game)}>
-        <img className="game-card__cover" src={game.cover} alt={game.title} />
+      <button
+        className="game-card__cover-button"
+        type="button"
+        onClick={() => onOpenGame(game)}
+        aria-label={`Ver detalhes de ${game.title}`}
+      >
+        <img
+          className="game-card__cover"
+          src={game.cover}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
       </button>
 
       <div className="game-card__content">
         <div className="game-card__top">
-          <h2>{game.title}</h2>
-          <span className="game-card__rating">★ {game.rating.toFixed(1)}</span>
+          <h3>{game.title}</h3>
+
+          {game.ratingsCount > 0 && (
+            <span className="game-card__rating">
+              ★ {game.rating.toFixed(1)}
+            </span>
+          )}
         </div>
 
-        <p className="game-card__info">
-          {game.genres.length > 0 ? game.genres[0] : "Gênero não informado"}
+        <p className="game-card__info">{genres}</p>
+
+        <p className="game-card__platforms">
+          {getShortPlatforms(game.platforms)}
         </p>
 
-        <p className="game-card__platforms">{getShortPlatforms(game.platforms)}</p>
-
         <div className="game-card__footer">
-          <span className="game-card__status">{getStatusText(status)}</span>
-          <span>{game.ratingsCount.toLocaleString("pt-BR")} avaliações</span>
+          {status !== "none" && (
+            <span className="game-card__status">
+              {getStatusText(status)}
+            </span>
+          )}
+
+          <span className="game-card__reviews">
+            {ratingsText}
+          </span>
         </div>
       </div>
     </article>
